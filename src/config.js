@@ -44,106 +44,64 @@ module.exports = {
   // view: mức xem | readonly: chỉ staff được gửi | writers: mức được gửi (ghi đè readonly)
   categories: [
     {
-      name: '📌 THÔNG TIN',
+      name: '👑 PEAKY CLUB',
       view: 'public',
       channels: [
-        { key: 'verify',   name: '✅・xác-minh',  type: 'text', view: 'everyone', readonly: true },
-        { key: 'welcome',  name: '👋・chào-mừng', type: 'text', readonly: true },
-        { key: 'rules',    name: '📜・nội-quy',   type: 'text', readonly: true },
-        { key: 'news',     name: '📢・thông-báo', type: 'text', readonly: true },
-        { key: 'roadmap',  name: '🗺️・roadmap',   type: 'text', readonly: true },
-        { key: 'changelog',name: '📝・changelog', type: 'text', readonly: true }
+        { key: 'verify', name: '✅・xác-minh',   type: 'text', view: 'everyone', readonly: true },
+        { key: 'news',   name: '📢・thông-báo',  type: 'text', readonly: true },
+        { key: 'rules',  name: '📜・nội-quy',    type: 'text', readonly: true },
+        { key: 'tiers',  name: '💎・bảng-giá',   type: 'text', readonly: true },
+        { key: 'ticket', name: '🎫・tạo-ticket', type: 'text', readonly: true }
       ]
     },
     {
-      name: '🛒 CỬA HÀNG',
+      name: '🆓 FREE',
       view: 'public',
       channels: [
-        { key: 'products', name: '🛍️・sản-phẩm', type: 'forum', readonly: true,
-          tags: ['QBX', 'UI', 'Job', 'Hệ thống', 'Gold', 'Diamond', 'Free'] },
-        { key: 'tiers',    name: '💎・cấp-bậc-thành-viên', type: 'text', readonly: true },
-        { key: 'pricing',  name: '💳・bảng-giá',  type: 'text', readonly: true },
-        { key: 'howtobuy', name: '🧾・cách-mua',  type: 'text', readonly: true },
-        { key: 'reviews',  name: '⭐・đánh-giá',  type: 'text', readonly: true, writers: 'customer' }
+        { key: 'f_scripts',  name: '📜・free-scripts',  type: 'text', readonly: true },
+        { key: 'f_maps',     name: '🗺️・free-maps',     type: 'text', readonly: true },
+        { key: 'f_vehicles', name: '🚗・free-vehicles', type: 'text', readonly: true },
+        { key: 'f_clothing', name: '👕・free-clothing', type: 'text', readonly: true },
+        { key: 'f_ui',       name: '🖥️・free-ui',       type: 'text', readonly: true }
       ]
     },
     {
-      name: '🎬 SHOWCASE',
-      view: 'public',
-      channels: [
-        { key: 'video',  name: '🎥・video-preview', type: 'text', readonly: true },
-        { key: 'images', name: '🖼️・ảnh-ui',        type: 'text', readonly: true },
-        { key: 'free',   name: '🆓・source-free',   type: 'text', readonly: true }
-      ]
-    },
-    {
-      name: '🛒 KHU CUSTOMER',
-      view: 'customer',
-      channels: [
-        { key: 'c_install',  name: '📦・hướng-dẫn-cài-đặt', type: 'text', readonly: true },
-        { key: 'c_docs',     name: '📚・docs',               type: 'text', readonly: true },
-        { key: 'c_download', name: '📥・tải-xuống',          type: 'text', readonly: true },
-        { key: 'c_update',   name: '🔄・bản-cập-nhật',       type: 'text', readonly: true },
-        { key: 'c_chat',     name: '💬・chat-customer',      type: 'text' }
-      ]
-    },
-    {
-      name: '🥇 KHU GOLD',
+      name: '🥇 GOLD',
       view: 'gold',
       channels: [
-        { key: 'g_news',     name: '📢・thông-báo-gold', type: 'text', readonly: true },
-        { key: 'g_download', name: '📥・tải-xuống-gold', type: 'text', readonly: true },
-        { key: 'g_update',   name: '🔄・cập-nhật-gold',  type: 'text', readonly: true },
-        { key: 'g_chat',     name: '🥂・gold-lounge',    type: 'text' }
+        { key: 'g_scripts',  name: '📜・gold-scripts',  type: 'text', readonly: true },
+        { key: 'g_maps',     name: '🗺️・gold-maps',     type: 'text', readonly: true },
+        { key: 'g_vehicles', name: '🚗・gold-vehicles', type: 'text', readonly: true },
+        { key: 'g_clothing', name: '👕・gold-clothing', type: 'text', readonly: true },
+        { key: 'g_ui',       name: '🖥️・gold-ui',       type: 'text', readonly: true }
       ]
     },
     {
-      name: '💎 KHU DIAMOND',
+      name: '💎 DIAMOND',
       view: 'diamond',
       channels: [
-        { key: 'd_news',     name: '📢・thông-báo-diamond', type: 'text', readonly: true },
-        { key: 'd_download', name: '📥・tải-xuống-diamond', type: 'text', readonly: true },
-        { key: 'd_beta',     name: '🧪・beta-test',         type: 'text' },
-        { key: 'd_request',  name: '✉️・yêu-cầu-riêng',     type: 'text' },
-        { key: 'd_chat',     name: '🍷・diamond-lounge',    type: 'text' },
-        { key: 'd_voice',    name: '💎 Diamond Lounge',     type: 'voice' }
+        { key: 'd_scripts',  name: '📜・diamond-scripts',  type: 'text', readonly: true },
+        { key: 'd_maps',     name: '🗺️・diamond-maps',     type: 'text', readonly: true },
+        { key: 'd_vehicles', name: '🚗・diamond-vehicles', type: 'text', readonly: true },
+        { key: 'd_clothing', name: '👕・diamond-clothing', type: 'text', readonly: true },
+        { key: 'd_ui',       name: '🖥️・diamond-ui',       type: 'text', readonly: true }
       ]
     },
     {
-      name: '🎫 HỖ TRỢ',
-      view: 'public',
-      channels: [
-        { key: 'ticket',  name: '🎫・tạo-ticket', type: 'text', readonly: true },
-        { key: 'faq',     name: '❓・faq',        type: 'text', readonly: true },
-        { key: 'bugs',    name: '🐞・báo-lỗi',    type: 'forum', view: 'customer',
-          tags: ['Đang xử lý', 'Đã sửa', 'Không phải lỗi'] },
-        { key: 'suggest', name: '💡・đề-xuất',    type: 'text' }
-      ]
-    },
-    {
-      name: '🤝 PARTNER',
-      view: 'partner',
-      channels: [
-        { key: 'p_chat', name: '🤝・partner-chat',  type: 'text' },
-        { key: 'p_ads',  name: '📣・quảng-bá-partner', type: 'text', view: 'public', readonly: true, writers: 'partner' }
-      ]
+      // Mỗi sản phẩm tạo bằng /san-pham-tao có 1 kênh riêng ở đây,
+      // chỉ người đã mua sản phẩm đó (và staff) mới thấy
+      key: 'productCategory',
+      name: '📥 TẢI XUỐNG',
+      view: 'staff',
+      channels: []
     },
     {
       name: '💬 CỘNG ĐỒNG',
       view: 'public',
       channels: [
-        { key: 'chat',     name: '💬・chat-chung',   type: 'text' },
-        { key: 'showoff',  name: '🏙️・khoe-server',  type: 'text' },
-        { key: 'voice',    name: '🔊 Phòng Chung',   type: 'voice' }
+        { key: 'chat',    name: '💬・chat',     type: 'text' },
+        { key: 'reviews', name: '⭐・đánh-giá', type: 'text', readonly: true, writers: 'customer' }
       ]
-    },
-    {
-      // Mỗi sản phẩm tạo bằng /san-pham-tao sẽ có 1 kênh riêng ở đây,
-      // chỉ người đã mua sản phẩm đó (và staff) mới thấy
-      key: 'productCategory',
-      name: '📥 SẢN PHẨM CỦA BẠN',
-      view: 'staff',
-      channels: []
     },
     {
       key: 'ticketCategory',
@@ -173,15 +131,16 @@ module.exports = {
     '**6.** Vi phạm điều 3 sẽ bị thu hồi gói và cấm vĩnh viễn, không hoàn tiền.'
   ].join('\n'),
 
+  // Nội dung bảng giá (kênh 💎・bảng-giá)
   tierInfo: [
     {
       key: 'customer',
       title: '🛒 Customer',
-      price: 'Liên hệ',
+      price: 'Theo từng sản phẩm',
       perks: [
-        'Truy cập khu Customer',
-        'Hướng dẫn cài đặt và docs đầy đủ',
-        'Nhận bản cập nhật của sản phẩm đã mua'
+        'Mua lẻ từng sản phẩm',
+        'Kênh tải riêng cho sản phẩm đã mua',
+        'Nhận cập nhật và hỗ trợ qua ticket'
       ]
     },
     {
@@ -189,8 +148,7 @@ module.exports = {
       title: '🥇 Gold',
       price: 'Liên hệ',
       perks: [
-        'Toàn bộ quyền lợi Customer',
-        'Mở khóa khu Gold và các script gói Gold',
+        'Mở khóa 5 kênh Gold: Scripts, Maps, Vehicles, Clothing, UI',
         'Ticket được xử lý ưu tiên'
       ]
     },
@@ -200,9 +158,7 @@ module.exports = {
       price: 'Liên hệ',
       perks: [
         'Toàn bộ quyền lợi Gold',
-        'Mở khóa khu Diamond và các script gói Diamond',
-        'Dùng thử bản beta trước khi phát hành',
-        'Gửi yêu cầu riêng trực tiếp đến dev',
+        'Mở khóa 5 kênh Diamond: Scripts, Maps, Vehicles, Clothing, UI',
         'Ưu tiên hỗ trợ cao nhất'
       ]
     }

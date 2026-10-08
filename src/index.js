@@ -120,7 +120,8 @@ const tierChoices = cfg.tiers.map((t) => ({ name: cfg.tierLabels[t], value: t })
 const commands = [
   new SlashCommandBuilder().setName('setup')
     .setDescription('Dựng role, kênh, phân quyền và các bảng của store')
-    .setDefaultMemberPermissions(P.Administrator),
+    .setDefaultMemberPermissions(P.Administrator)
+    .addBooleanOption((o) => o.setName('xoa_kenh_cu').setDescription('Xóa các kênh bot đã tạo trước đây nhưng không còn dùng')),
 
   new SlashCommandBuilder().setName('san-pham-tao')
     .setDescription('Tạo sản phẩm mới (kèm role và kênh riêng cho người mua)')
@@ -174,7 +175,7 @@ async function registerCommands() {
 const handlers = {
   async 'setup'(i) {
     await i.deferReply(EPHEMERAL);
-    const report = await runSetup(i.guild);
+    const report = await runSetup(i.guild, { cleanup: i.options.getBoolean('xoa_kenh_cu') === true });
     // Gắn lại quyền cho kênh sản phẩm đã có (phòng khi role Support mới được tạo)
     for (const product of Object.values(data().products)) {
       const ch = i.guild.channels.cache.get(product.channelId);
@@ -182,6 +183,7 @@ const handlers = {
     }
     const lines = [
       report.created.length ? `Đã tạo mới ${report.created.length} mục.` : 'Không có mục nào mới, đã cập nhật quyền và bảng.',
+      ...(report.removed ? [`Đã xóa ${report.removed} kênh cũ.`] : []),
       ...report.warnings.map((w) => `⚠️ ${w}`)
     ];
     await i.editReply(lines.join('\n'));

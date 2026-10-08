@@ -213,12 +213,12 @@ async function postPanels(guild) {
   if (ch('tiers')) {
     const embed = new EmbedBuilder()
       .setColor(cfg.embedColor)
-      .setTitle('💎 Cấp bậc thành viên')
+      .setTitle('💎 Bảng giá')
       .setDescription('Cấp của bạn được tính theo sản phẩm cao nhất bạn đã mua. Dùng lệnh `/da-mua` để xem sản phẩm và cấp hiện tại.');
     for (const t of cfg.tierInfo) {
       embed.addFields({ name: `${t.title} — ${t.price}`, value: t.perks.map((p) => `› ${p}`).join('\n') });
     }
-    await upsertPanel(ch('tiers'), 'Cấp bậc', { embeds: [embed] });
+    await upsertPanel(ch('tiers'), 'Bảng giá', { embeds: [embed] });
   }
 
   // Ticket
@@ -240,12 +240,40 @@ async function postPanels(guild) {
   }
 }
 
-async function runSetup(guild) {
-  const report = { created: [], warnings: [] };
+// Kênh bot từng tạo nhưng không còn trong config
+async function cleanupOldChannels(guild, remove, report) {
+  const data = store.get();
+  const valid = new Set();
+  for (const cat of cfg.categories) {
+    valid.add(cat.key || `cat:${cat.name}`);
+    for (const ch of cat.channels) valid.add(ch.key);
+  }
+
+  const stale = Object.keys(data.channels).filter((k) => !valid.has(k));
+  if (!remove) {
+    if (stale.length) report.warnings.push(`Có ${stale.length} kênh cũ không còn dùng. Chạy /setup xoa_kenh_cu:True để xóa.`);
+    return;
+  }
+
+  // Xóa kênh con trước, category sau
+  const items = stale
+    .map((k) => ({ k, ch: guild.channels.cache.get(data.channels[k]) }))
+    .sort((a, b) => (a.ch?.type === ChannelType.GuildCategory) - (b.ch?.type === ChannelType.GuildCategory));
+  for (const { k, ch } of items) {
+    if (ch) await ch.delete('Dọn kênh cũ').catch(() => {});
+    delete data.channels[k];
+  }
+  store.save();
+  if (items.length) report.removed = items.length;
+}
+
+async function runSetup(guild, { cleanup = false } = {}) {
+  const report = { created: [], warnings: [], removed: 0 };
   await guild.roles.fetch();
   await guild.channels.fetch();
   await ensureRoles(guild, report);
   await ensureChannels(guild, report);
+  await cleanupOldChannels(guild, cleanup, report);
   await postPanels(guild);
   return report;
 }

@@ -19,23 +19,23 @@ Khách rời server rồi vào lại, bot tự trả lại đúng role đã mua.
 | Khu vực | Chưa xác minh | Member | Customer | Gold | Diamond | Support |
 |---|---|---|---|---|---|---|
 | ✅ xác-minh | Xem | Xem | Xem | Xem | Xem | Gửi |
-| Thông tin, Cửa hàng, Showcase | — | Xem | Xem | Xem | Xem | Gửi |
+| 👑 Peaky Club, 🆓 Free | — | Xem | Xem | Xem | Xem | Gửi |
+| 💬 chat | — | Gửi | Gửi | Gửi | Gửi | Gửi |
 | ⭐ đánh-giá | — | Xem | Gửi | Gửi | Gửi | Gửi |
-| Cộng đồng, đề-xuất | — | Gửi | Gửi | Gửi | Gửi | Gửi |
-| 🛒 Khu Customer | — | — | Có | Có | Có | Có |
-| 🐞 báo-lỗi | — | — | Có | Có | Có | Có |
-| 🥇 Khu Gold | — | — | — | Có | Có | Có |
-| 💎 Khu Diamond | — | — | — | — | Có | Có |
-| 📥 Kênh từng sản phẩm | — | — | Chỉ sản phẩm đã mua | ← | ← | Có |
-| 🤝 Partner | — | — | — | — | — | Có (+ Partner) |
+| 🥇 Gold (5 kênh) | — | — | — | Xem | Xem | Gửi |
+| 💎 Diamond (5 kênh) | — | — | — | — | Xem | Gửi |
+| 📥 Tải xuống | — | — | Chỉ sản phẩm đã mua | ← | ← | Gửi |
 | 📂 Ticket, 🔒 Staff | — | — | — | — | — | Có |
 
-Peaky có quyền Administrator nên thấy tất cả. Cấp cao luôn thấy khu của cấp thấp hơn.
+Mọi kênh nội dung đều chỉ staff được đăng, khách chỉ xem và tải.
+
+**Bán gói Gold / Diamond:** `/san-pham-tao ten:"Gói Gold" cap:Gold`, rồi `/cap-san-pham` cho khách mua gói.
+**Bán lẻ từng source:** tạo mỗi source là một sản phẩm cấp Customer (hoặc cấp khác nếu muốn tặng kèm quyền vào khu Gold/Diamond).
 
 ## Lệnh
 
 **Chỉ Peaky (Administrator):**
-- `/setup` — dựng hoặc cập nhật toàn bộ server. Chạy lại nhiều lần không bị tạo trùng.
+- `/setup` — dựng hoặc cập nhật toàn bộ server. Chạy lại nhiều lần không bị tạo trùng. Thêm `xoa_kenh_cu:True` để xóa kênh của bản cũ.
 - `/san-pham-tao ten cap` — tạo sản phẩm, kèm role và kênh riêng.
 - `/san-pham-sua san_pham cap` — đổi cấp sản phẩm, tự tính lại cấp cho người đã mua.
 - `/san-pham-xoa san_pham xac_nhan` — xóa sản phẩm, role và kênh của nó, thu hồi khỏi mọi người mua.
