@@ -46,6 +46,13 @@ Mọi kênh nội dung đều chỉ staff được đăng, khách chỉ xem và 
 - `/kiem-tra khach` — xem khách đã mua gì, cấp hiện tại.
 - `/san-pham-danh-sach` — danh sách sản phẩm và số người mua.
 
+**Đăng bài (Peaky và Support):**
+- `/dang kenh file link anh video ping` — đăng source thành embed. Sau khi gõ lệnh, bot mở form nhập Tên, Mô tả, Framework, Phiên bản, Yêu cầu.
+  - Cần ít nhất **file** hoặc **link**. File lớn hơn giới hạn upload của server thì dùng link (Drive, MEGA…).
+  - Màu embed tự đổi theo khu: xanh lá cho Free, vàng cho Gold, xanh kim cương cho Diamond.
+  - Mô tả nhiều dòng sẽ tự thành gạch đầu dòng.
+  - `ping` để trống nếu không muốn thông báo.
+
 **Mọi người:**
 - `/da-mua` — xem sản phẩm của mình (chỉ mình thấy).
 

@@ -7,6 +7,7 @@ const {
 const cfg = require('./config');
 const store = require('./store');
 const { runSetup, productOverwrites } = require('./setup');
+const post = require('./post');
 
 const { DISCORD_TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 if (!DISCORD_TOKEN || !CLIENT_ID || !GUILD_ID) {
@@ -162,7 +163,7 @@ const commands = [
 
   new SlashCommandBuilder().setName('da-mua')
     .setDescription('Xem sản phẩm bạn đã mua và cấp hiện tại')
-].map((c) => c.toJSON());
+].map((c) => c.toJSON()).concat(post.command);
 
 async function registerCommands() {
   const rest = new REST().setToken(DISCORD_TOKEN);
@@ -508,6 +509,16 @@ client.on(Events.InteractionCreate, async (i) => {
         .slice(0, 25)
         .map(([id, p]) => ({ name: `${p.name} (${cfg.tierLabels[p.tier]})`.slice(0, 100), value: id }));
       return i.respond(choices);
+    }
+
+    if (i.isChatInputCommand() && i.commandName === 'dang') {
+      if (!isStaff(i.member)) return i.reply({ content: 'Bạn không có quyền dùng lệnh này.', ...EPHEMERAL });
+      return post.handleCommand(i);
+    }
+
+    if (i.isModalSubmit() && i.customId.startsWith('dang:')) {
+      if (!isStaff(i.member)) return i.reply({ content: 'Bạn không có quyền dùng lệnh này.', ...EPHEMERAL });
+      return post.handleModal(i);
     }
 
     if (i.isChatInputCommand()) {
